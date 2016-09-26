@@ -39,6 +39,8 @@ class IO_Utils:
         while n < num_crop:
             i = random.randrange(0, x)
             j = random.randrange(0, y)
+            #This map is used to ensure that we don't
+            #use the same (i,j) pair twice.
             if index_map[i,j] == 0:
                 index_map[i,j] = 1
             else:
@@ -124,20 +126,20 @@ class IO_Utils:
 
 #Used for testing:
 
-    def main(self):
-        from PIL import Image
-        im = Image.open('aerial_photo.jpg')
-        #im = self.image_scale(im, 256)
-        array = np.array(im)
-        n = 6
-        array_of_images,_ = self.image_crop(array, array, 256, 256, n)
-        #array = self.image_rotate(array)
-        #array = self.image_flip_vertical(im)
-        print array_of_images.shape
-        for i in xrange(n):
-            im = Image.fromarray(np.uint8(array_of_images[:,:,:,i]))
-            im.show()
-
-if __name__ == "__main__":
-    io_utils = IO_Utils()
-    io_utils.main()
+#     def main(self):
+#         from PIL import Image
+#         im = Image.open('aerial_photo.jpg')
+#         #im = self.image_scale(im, 256)
+#         array = np.array(im)
+#         n = 6
+#         array_of_images,_ = self.image_crop(array, array, 256, 256, n)
+#         #array = self.image_rotate(array)
+#         #array = self.image_flip_vertical(im)
+#         print array_of_images.shape
+#         for i in xrange(n):
+#             im = Image.fromarray(np.uint8(array_of_images[:,:,:,i]))
+#             im.show()
+#
+# if __name__ == "__main__":
+#     io_utils = IO_Utils()
+#     io_utils.main()
