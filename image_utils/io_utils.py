@@ -16,7 +16,7 @@ class IO_Utils:
                     (WxHxD) where:
                     W = Image width
                     H = Image height
-                    D = Image depth (usually 3 for 3 colour channels)
+                    D = Image depth (for ground truth it is only 1 as there is only 1 colour channel)
         :param width: The desired width in the cropped image.
         :param height: The desired height in the cropped image.
         :return: images: A numpy array of randomly sampled cropped portion of the input image.
@@ -32,8 +32,10 @@ class IO_Utils:
         x = im.shape[0]
         y = im.shape[1]
         d = im.shape[2]
+        gt_d = gt.shape[2]
         images = np.zeros((width, height, d, num_crop))
-        gt_images = np.zeros_like(images)
+        # gt_images only has 1 colour channel
+        gt_images = np.zeros((width, height, gt_d, num_crop))
         index_map = np.zeros((x, y))
         n = 0
         while n < num_crop:
